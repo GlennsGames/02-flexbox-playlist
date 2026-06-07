@@ -22,12 +22,35 @@ header h1 {
   font-size: 42px;
 }
 
-/* Album card styling */
+.container {
+  display: flex;
+  flex-wrap: nowrap;
+  justify-content: flex-start;
+  gap: 20px;
+  overflow-x: auto;
+  max-width: 940px;
+  margin: 0 auto;
+  padding-bottom: 10px;
+  scroll-snap-type: x mandatory;
+  -webkit-overflow-scrolling: touch;
+}
+
+.container::-webkit-scrollbar {
+  height: 10px;
+}
+
+.container::-webkit-scrollbar-thumb {
+  background: rgba(0, 0, 0, 0.2);
+  border-radius: 999px;
+}
+
 .album {
   position: relative;
-  width: 220px; 
+  min-width: 220px;
+  width: 220px;
   background: #fff;
   border: 1px solid #ddd;
+  scroll-snap-align: start;
 }
 
 .album img {
@@ -51,5 +74,33 @@ header h1 {
 }
 
 .overlay {
- display: none;
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.75);
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 15px;
+  opacity: 0;
+  transition: opacity 0.25s ease;
+}
+
+.album:hover .overlay {
+  opacity: 1;
+}
+
+@media (max-width: 768px) {
+  .container {
+    flex-direction: column;
+    align-items: center;
+    overflow-x: visible;
+    max-width: 100%;
+  }
+
+  .album {
+    width: min(90vw, 420px);
+    min-width: auto;
+  }
 }
